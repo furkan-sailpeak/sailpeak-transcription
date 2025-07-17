@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sailpeak Meeting Transcription</title>
+    <style>
+        body {
+            font-family: 'Garamond', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #242D31 0%, #36464B 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #F2F3EF;
+        }
+        
+        .container {
+            background: #F2F3EF;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            color: #242D31;
+        }
+        
+        h1 {
+            font-family: 'Garamond', 'Times New Roman', serif;
+            font-weight: bold;
+            color: #242D31;
+            text-align: center;
+            margin-bottom: 8px;
+            font-size: 32px;
+        }
+        
+        .subtitle {
+            font-family: 'Public Sans', Arial, sans-serif;
+            color: #646869;
+            text-align: center;
+            margin-bottom: 32px;
+            font-size: 16px;
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        label {
+            display: block;
+            font-family: 'Public Sans', Arial, sans-serif;
+            color: #242D31;
+            font-weight: 500;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        input[type="url"], input[type="email"] {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #8C9091;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: 'Public Sans', Arial, sans-serif;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+            background: #F2F3EF;
+        }
+        
+        input[type="url"]:focus, input[type="email"]:focus {
+            outline: none;
+            border-color: #F7E194;
+            box-shadow: 0 0 0 3px rgba(247, 225, 148, 0.2);
+        }
+        
+        .btn {
+            width: 100%;
+            background: #F7E194;
+            color: #242D31;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: 'Public Sans', Arial, sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn:hover {
+            background: #EBD37F;
+            transform: translateY(-1px);
+        }
+        
+        .btn:disabled {
+            background: #8C9091;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .message {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Public Sans', Arial, sans-serif;
+            display: none;
+        }
+        
+        .success {
+            background: #e8f5e8;
+            color: #137333;
+            border: 1px solid #ceead6;
+        }
+        
+        .error {
+            background: #fce8e6;
+            color: #d93025;
+            border: 1px solid #f9dedc;
+        }
+        
+        .info {
+            background: #F7E194;
+            color: #242D31;
+            border: 1px solid #EBD37F;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            font-size: 14px;
+            font-family: 'Public Sans', Arial, sans-serif;
+        }
+        
+        .example {
+            font-size: 12px;
+            color: #646869;
+            margin-top: 4px;
+            font-family: 'Public Sans', Arial, sans-serif;
+        }
+        
+        .spinner {
+            border: 3px solid #8C9091;
+            border-top: 3px solid #F7E194;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 12px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .brand-footer {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 12px;
+            color: #646869;
+            font-family: 'Public Sans', Arial, sans-serif;
+        }
+        
+        .brand-logo {
+            font-family: 'Garamond', 'Times New Roman', serif;
+            font-weight: bold;
+            color: #242D31;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎙️ Sailpeak Transcription</h1>
+        <p class="subtitle">Free AI-powered meeting transcription</p>
+        
+        <div class="info">
+            <strong>How it works:</strong><br>
+            1. Share your Google Drive file with the service account<br>
+            2. Paste the Drive link below<br>
+            3. Enter your email address<br>
+            4. Get results via email in minutes!<br>
+            <small>Supports all audio/video formats</small>
+        </div>
+        
+        <form id="transcribeForm">
+            <div class="form-group">
+                <label for="driveUrl">Google Drive Link:</label>
+                <input 
+                    type="url" 
+                    id="driveUrl" 
+                    placeholder="https://drive.google.com/file/d/..."
+                    required
+                >
+                <div class="example">Make sure file is shared with the service account</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Your Email:</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    placeholder="your.email@example.com"
+                    required
+                >
+            </div>
+            
+            <button type="submit" class="btn" id="submitBtn">
+                Start Transcription
+            </button>
+        </form>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Processing your meeting... This may take a few minutes.</p>
+        </div>
+        
+        <div id="message" class="message"></div>
+        
+        <div class="brand-footer">
+            <div class="brand-logo">Sailpeak</div>
+            <div>Pioneer • Power • New Luxury</div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('transcribeForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const driveUrl = document.getElementById('driveUrl').value;
+            const email = document.getElementById('email').value;
+            const submitBtn = document.getElementById('submitBtn');
+            const loading = document.getElementById('loading');
+            const messageDiv = document.getElementById('message');
+            
+            // Show loading
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Processing...';
+            loading.style.display = 'block';
+            messageDiv.style.display = 'none';
+            
+            try {
+                const response = await fetch('/transcribe', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        drive_url: driveUrl,
+                        email: email
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    messageDiv.className = 'message success';
+                    messageDiv.textContent = data.message;
+                    document.getElementById('transcribeForm').reset();
+                } else {
+                    messageDiv.className = 'message error';
+                    messageDiv.textContent = 'Error: ' + data.error;
+                }
+                messageDiv.style.display = 'block';
+                
+            } catch (error) {
+                messageDiv.className = 'message error';
+                messageDiv.textContent = 'Network error. Please try again.';
+                messageDiv.style.display = 'block';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Start Transcription';
+                loading.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
